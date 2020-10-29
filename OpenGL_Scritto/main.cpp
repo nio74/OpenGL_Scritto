@@ -23,13 +23,18 @@ int main() {
 
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "ProvaOpen Gl a mano", NULL, NULL);
 
-    if (window == null)
+    if (window == NULL)
     {
         std::cout << "Failed to create GLFW window";
         glfwTerminate();
         return -1;
-
     }
 
+    //glad: carichiamo tutti i ponter funzione 
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD";
+            return -1;
+    }
 
 }
