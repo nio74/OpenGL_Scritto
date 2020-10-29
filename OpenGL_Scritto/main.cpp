@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
 const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
 
@@ -25,16 +27,45 @@ int main() {
 
     if (window == NULL)
     {
-        std::cout << "Failed to create GLFW window";
+        std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
         return -1;
     }
 
+    glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
     //glad: carichiamo tutti i ponter funzione 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        std::cout << "Failed to initialize GLAD";
+        std::cout << "Failed to initialize GLAD" <<std::endl;
             return -1;
     }
 
+    while (!glfwWindowShouldClose(window))
+    {
+        glfwSwapBuffers(window);//manda in funzione la finestra
+        glfwPollEvents();//controlla gli eventi
+        
+    }
+
+    float vertices[] = {
+        -0.5f,-0.5f,0.0f,
+        0.5f,0.5f,0.0f,
+        0.0f,0.5,0.0f
+    }
+
+    glfwTerminate();
+    return 0;
+
 }
+
+
+//glfw: ogni colta che la dimensione delle dimensioni della finestra cambia(dall'utente o dal OS)
+//      questa funzione callback viene eseguita
+// ---------------------------------------------------------------------------------------------
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
