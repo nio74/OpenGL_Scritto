@@ -8,6 +8,20 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
 
+const char* vertexShaderSource = "#version 330 core\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "void main()\n"
+    "{\n"
+    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "}\0";
+
+const char* fragmentShaderSource = "#version 330 core\n"
+    "out vec4 FragColor;\n"
+    "void main()\n"
+    "{\n"
+    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "}\n\0";
+
 int main() {
 
     //Inzializiamo GLFW
@@ -49,11 +63,44 @@ int main() {
         
     }
 
+    // build and compile our shader program
+    // ------------------------------------
+     // vertex shader
+
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);//dichiariamo il tipo vertex shader
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);// dichiariamo la sorgente
+    glCompileShader(vertexShader);//compiliamo il shader
+
+
+    //controlliamo se la compilazione è andata a buon fine
+
+    int success;
+    char infolog[512];// creiamo un contenitore per i messaggi di log
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);//richiediamo lo stato dello shader
+
+    if (!success)
+    {
+        glGetShaderInfoLog(vertexShader, 512, NULL, infolog);
+
+        std::cout << "ERROR: Cmpoilazione shader fallita" << infolog << std::endl;
+
+    }
+
+    
+
     float vertices[] = {
         -0.5f,-0.5f,0.0f,
         0.5f,0.5f,0.0f,
         0.0f,0.5,0.0f
-    }
+    };
+
+    unsigned int VBO;//ID BUffer
+    glGenBuffers(1, &VBO);//genera l'oggetto buffer
+    glBindBuffer(GL_ARRAY_BUFFER,VBO);//Associa i dati e specifica il tipo in questo caso un ARRAY_BUFFER
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);//è una funzione specificatamente mirata per copiare i dati definiti dall'utente nel buffer attualmente associato
+
 
     glfwTerminate();
     return 0;
