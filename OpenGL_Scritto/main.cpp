@@ -1,7 +1,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
+
+
 #include "Shader.h"
+
+#include <iostream>
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -49,7 +52,10 @@ int main() {
     // build and compile our shader program
     // ------------------------------------
 
-    Shader ourShader("Shaders/vertex.glsl", "Shaders/fragment.glsl");
+    Shader ourShader("vertex.glsl", "fragment.glsl");
+
+     //char Stampa = 'p';
+     //Shader("edfsdf");
 
     
 
