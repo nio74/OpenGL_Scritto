@@ -165,9 +165,11 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MioShader.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MioShader.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
