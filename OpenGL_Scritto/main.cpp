@@ -63,15 +63,16 @@ int main() {
 
 
     float vertices[] = {
-        // positions         // colors
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
+        // positions         // colors   //texture coord  
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f, 1.0f, 1.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f, 0.0f, 0.0f,  // bottom left
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f, 0.0f, 1.0f   // top 
     };
 
-    unsigned int VBO, VAO;//ID BUffer
+    unsigned int VBO, VAO, EBO;//ID BUffer
     glGenVertexArrays(1,&VAO);//Specifico il vertexArray
     glGenBuffers(1, &VBO);//genera l'oggetto buffer
+    glGenBuffers(1, &EBO);
     //associare prima il Vertex Array Object, quindi associare e impostare i buffer dei vertici, quindi configurare gli attributi dei vertici.
     glBindVertexArray(VAO);
 
